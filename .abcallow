@@ -1,0 +1,32 @@
+# .abcallow — abc 命令白名单
+# 一行一条完整命令；argv 逐 token 精确匹配，无通配符、无前缀匹配。
+# 可选前缀：[server] 默认后台 / [task] 前台任务 / [oneshot] 短命令（默认）。
+# 修改后无需重启 bridge。
+# 注意：以下是模板默认放行项，空项目建议只留 node --version / git status，其余删掉。
+# 放行 npm test / npm run build / npm run dev 等于允许 AI 跑项目里任意同名脚本。
+
+[oneshot] node --version
+[oneshot] git status
+[oneshot] git diff
+[oneshot] git log --oneline -20
+git init
+git add .
+git commit -F docs/commits/current.txt
+
+git remote add origin https://github.com/Leonardo-lijianan/companion-robot.git
+git branch -M main
+git push -u origin main
+
+[task] npm test
+[task] npm run build
+
+[server] npm run dev
+
+[server] npm install --prefix web
+[server] npm run build --prefix web
+[server] npm run lint --prefix web
+[server] npm install --prefix server
+[server] npm run build --prefix server
+
+[server] npm run dev --prefix server
+[server] npm run dev --prefix web

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W1 课件 · 选题与方案 + 工程骨架 · 陪伴型机器人课题</title>
+<style>
+  :root {
+    --bg: #F6F7F9;
+    --bg2: #FFFFFF;
+    --ink: #17202A;
+    --muted: #5B6773;
+    --rule: #E1E6EB;
+    --accent: #1D4ED8;
+    --accent-soft: rgba(29, 78, 216, 0.07);
+    --ok: #15803D;
+    --warn: #B45309;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+    font-size: 16px; line-height: 1.75;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px 80px; }
+
+  header { padding: 56px 0 32px; border-bottom: 2px solid var(--accent); margin-bottom: 36px; }
+  .kicker { font-size: 13px; letter-spacing: 0.12em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+  h1 { font-size: 30px; margin: 10px 0 6px; }
+  .sub { color: var(--muted); font-size: 15px; }
+  .meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+  .meta span {
+    background: var(--bg2); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 4px 12px; font-size: 13px; color: var(--muted);
+  }
+
+  h2 {
+    font-size: 21px; margin: 44px 0 16px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+  }
+  h2 .no { color: var(--accent); margin-right: 8px; }
+  h3 { font-size: 17px; margin: 26px 0 10px; color: var(--accent); }
+  p { margin: 8px 0; }
+  ul, ol { margin: 8px 0 8px 1.4em; }
+  li { margin: 4px 0; }
+  strong { color: var(--ink); }
+  mark.key { background: none; color: var(--accent); font-weight: 700; }
+
+  .card {
+    background: var(--bg2); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 18px 20px; margin: 14px 0;
+  }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; margin: 12px 0; }
+  th, td { border: 1px solid var(--rule); padding: 9px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--accent-soft); color: var(--ink); font-weight: 700; }
+
+  pre {
+    background: #0F172A; color: #E2E8F0; border-radius: 8px;
+    padding: 14px 16px; overflow-x: auto; font-size: 13.5px; line-height: 1.6;
+    margin: 10px 0;
+  }
+  code { font-family: Consolas, "Courier New", monospace; }
+  p code, li code, td code {
+    background: var(--accent-soft); color: var(--accent);
+    padding: 1px 6px; border-radius: 4px; font-size: 0.9em;
+  }
+
+  .step {
+    display: flex; gap: 14px; margin: 18px 0; padding: 16px 18px;
+    background: var(--bg2); border: 1px solid var(--rule); border-radius: 10px;
+  }
+  .step .n {
+    flex: 0 0 34px; height: 34px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; font-size: 15px;
+  }
+  .step .b { flex: 1; min-width: 0; }
+  .step .t { font-weight: 700; margin-bottom: 4px; }
+
+  .callout {
+    border-left: 4px solid var(--warn); background: rgba(180, 83, 9, 0.06);
+    padding: 10px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 14.5px;
+  }
+  .callout.blue { border-left-color: var(--accent); background: var(--accent-soft); }
+
+  .check { list-style: none; margin-left: 0; }
+  .check li {
+    list-style: none; margin: 8px 0; padding: 10px 14px 10px 40px; position: relative;
+    background: var(--bg2); border: 1px dashed var(--rule); border-radius: 8px;
+  }
+  .check li::before {
+    content: "□"; position: absolute; left: 14px; top: 8px;
+    color: var(--accent); font-size: 17px;
+  }
+
+  .time { font-size: 12.5px; color: var(--muted); background: var(--bg); border: 1px solid var(--rule); border-radius: 4px; padding: 1px 8px; margin-left: 8px; }
+
+  footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">陪伴型机器人课题 · 第 1 周课件</div>
+  <h1>选题与方案 + 工程骨架</h1>
+  <p class="sub">本周围绕任务书 W1 交付：<mark class="key">1 页选型说明 + 可运行的空壳项目</mark>。知识点约占 30%，动手操作约占 70%。</p>
+  <div class="meta">
+    <span>4 学时 = 2 节课 × 2 学时</span>
+    <span>个人独立完成</span>
+    <span>对应验收：目标 4 / 约束 1 / 验收 6</span>
+  </div>
+</header>
+
+<!-- ============ 第一部分 知识点 ============ -->
+<h2><span class="no">壹</span>知识点</h2>
+
+<h3>1. 什么是陪伴型机器人</h3>
+<p>它和普通聊天机器人的区别不在"会不会聊天"，而在三件事：</p>
+<div class="table-wrap">
+<table>
+  <thead><tr><th style="width:22%">能力</th><th>普通聊天机器人</th><th>陪伴型机器人（你要做的）</th></tr></thead>
+  <tbody>
+    <tr><td><strong>人格</strong></td><td>无固定人设，问什么答什么</td><td>有名字、语气、边界，始终如一</td></tr>
+    <tr><td><strong>知识库</strong></td><td>靠模型自带的通用知识</td><td>靠<strong>你自己收集的领域语料</strong>，回答带出处</td></tr>
+    <tr><td><strong>长期记忆</strong></td><td>关掉页面就忘了你</td><td>跨会话记住用户的名字、偏好、经历</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="callout blue">一句话记住本课题：<strong>知识是公共的（RAG 负责），记忆是私人的（记忆模块负责）。</strong></div>
+
+<h3>2. 什么是 RAG（检索增强生成）</h3>
+<p>用户提问后，系统不是直接让大模型"凭印象"回答，而是先四步：</p>
+<ol>
+  <li>把问题转成向量（Embedding）</li>
+  <li>在你的知识库向量里找最相似的几段（检索 Top-5）</li>
+  <li>把找到的原文拼进提示词（"请根据以下资料回答……"）</li>
+  <li>模型基于资料生成回答，并<strong>标注出处</strong></li>
+</ol>
+<p>好处：答案可溯源、可控幻觉——知识库没有的就拒答，不编。</p>
+
+<h3>3. 选型三问（今天必须回答的问题）</h3>
+<div class="grid2">
+  <div class="card"><strong>① 陪谁？</strong><br>选定一个人群（老人 / 儿童 / 备考生 / 新手爸妈 / 独居上班族……），写清他们的<mark class="key">真实痛点</mark>。</div>
+  <div class="card"><strong>② 答什么？</strong><br>圈定知识库的 5 个主题域。超出范围的问题，机器人应当拒答。</div>
+  <div class="card"><strong>③ 凭什么可信？</strong><br>每个主题域要能<mark class="key">公开找到 ≥30 篇</mark>可标注来源的语料，否则课题无法验收。</div>
+  <div class="card"><strong>反面案例</strong><br>"陪所有心情不好的人"——人群太泛、语料无法界定、评测无法出题。<mark class="key">会被教师砍掉</mark>。</div>
+</div>
+
+<h3>4. 技术栈地图（W1 只搭骨架，不写业务）</h3>
+<div class="table-wrap">
+<table>
+  <thead><tr><th>层</th><th>选型</th><th>哪周做</th></tr></thead>
+  <tbody>
+    <tr><td>前端</td><td>Vue 3 + Vite + TypeScript（strict）</td><td>W1 建骨架，W6 做界面</td></tr>
+    <tr><td>服务端</td><td>Node.js + Express + TypeScript</td><td>W1 建骨架，W3 起写业务</td></tr>
+    <tr><td>模型</td><td>国内可直连 API（DeepSeek / 通义 / 混元，任选其一）</td><td>W3</td></tr>
+    <tr><td>知识库</td><td>Markdown 语料 + 向量数组文件 + 内存余弦检索</td><td>W2–W3</td></tr>
+    <tr><td>部署</td><td>云服务器 + PM2 + Nginx + HTTPS</td><td>W6</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ============ 第二部分 第1节课 ============ -->
+<h2><span class="no">贰</span>第 1 节课：选题 <span class="time">2 学时</span></h2>
+
+<div class="step"><div class="n">1</div><div class="b">
+  <div class="t">填写《选题卡》</div>
+  <p>按下面模板新建 <code>docs/选题卡.md</code>，逐项填写，不许留空：</p>
+<pre><code># 选题卡
+## 陪伴对象
+（一类具体人群，一句话）
+## 三个典型使用场景
+1. …（谁，在什么时候，问什么）
+2. …
+3. …
+## 知识库 5 个主题域
+1. …  2. …  3. …  4. …  5. …
+## 拒答范围
+（哪些问题机器人必须拒绝或转人工，如：诊断病情、用药剂量）
+## 语料可行性
+（每个主题域列出 2–3 个公开来源：政府发布 / 权威机构指南 / 公开教材）</code></pre>
+</div></div>
+
+<div class="step"><div class="n">2</div><div class="b">
+  <div class="t">教师逐一过卡</div>
+  <p>判定标准只有一条：<mark class="key">语料能否公开找到 ≥30 篇</mark>。找不到就当场换主题域或换人群。通过后教师签字。</p>
+</div></div>
+
+<div class="step"><div class="n">3</div><div class="b">
+  <div class="t">写 1 页选型说明</div>
+  <p>由选题卡扩写，回答"为什么选这个陪伴对象、知识库为什么装这些内容"，300–500 字，存为 <code>docs/选型说明.md</code>。</p>
+  <div class="callout">这份文件是<mark class="key">验收目标 4</mark>（选型讲得清）的第一份证据，W7 答辩要引用它。</div>
+</div></div>
+
+<!-- ============ 第三部分 第2节课 ============ -->
+<h2><span class="no">叁</span>第 2 节课：搭工程骨架 <span class="time">2 学时</span></h2>
+
+<div class="step"><div class="n">4</div><div class="b">
+  <div class="t">装环境并自检</div>
+  <p>安装 Node.js 20 LTS、Git、VS Code。装完在终端逐条检查：</p>
+<pre><code>node -v    # 应输出 v20.x.x
+npm -v     # 应输出 10.x.x
+git --version</code></pre>
+</div></div>
+
+<div class="step"><div class="n">5</div><div class="b">
+  <div class="t">创建前端骨架</div>
+<pre><code>npm create vite@latest web -- --template vue-ts
+cd web
+npm install
+npm run dev</code></pre>
+  <p>浏览器打开 <code>http://localhost:5173</code>，能看到 Vite 默认页即通过。</p>
+</div></div>
+
+<div class="step"><div class="n">6</div><div class="b">
+  <div class="t">开启 TS strict 模式（硬约束）</div>
+  <p>打开 <code>web/tsconfig.json</code>，确认：</p>
+<pre><code>{
+  "compilerOptions": {
+    "strict": true
+    // …其余保持不变
+  }
+}</code></pre>
+  <div class="callout">任务书验收 6 要求 strict 模式，<mark class="key">现在不开，W7 补很痛</mark>。</div>
+</div></div>
+
+<div class="step"><div class="n">7</div><div class="b">
+  <div class="t">创建服务端骨架（最小健康检查）</div>
+<pre><code>mkdir server; cd server
+npm init -y
+npm install express
+npm install -D typescript @types/express tsx</code></pre>
+  <p>新建 <code>server/src/index.ts</code>：</p>
+<pre><code>import express from "express";
+
+const app = express();
+app.use(express.json());
+
+app.get("/api/health", (_req, res) => {
+  res.json({ ok: true });
+});
+
+app.listen(3000, () => console.log("server on :3000"));</code></pre>
+  <p>在 <code>server/package.json</code> 加启动脚本：</p>
+<pre><code>"scripts": { "dev": "tsx src/index.ts" }</code></pre>
+  <p>运行 <code>npm run dev</code>，浏览器访问 <code>http://localhost:3000/api/health</code>，看到 <code>{"ok":true}</code> 即通过。</p>
+</div></div>
+
+<div class="step"><div class="n">8</div><div class="b">
+  <div class="t">配置 ESLint + Prettier</div>
+<pre><code>cd web
+npm install -D eslint prettier @typescript-eslint/eslint-plugin @typescript-eslint/parser</code></pre>
+  <p>用 <code>npx eslint . --fix</code> 清理，要求：<mark class="key">零 error</mark>（warning 可暂留）。</p>
+</div></div>
+
+<div class="step"><div class="n">9</div><div class="b">
+  <div class="t">初始化 Git 仓库并提交</div>
+<pre><code># 在项目根目录（web 与 server 的上一级）
+git init
+echo "node_modules/
+dist/
+.env" > .gitignore
+git add .
+git commit -m "chore: project skeleton (web + server)"
+git add docs/选题卡.md
+git commit -m "docs: topic selection card"
+git add docs/选型说明.md
+git commit -m "docs: topic rationale"</code></pre>
+  <div class="callout"><mark class="key">从本周起，每周都要有真实提交记录。</mark>验收 6 明确"禁止一次性倾倒代码"——今天这 3 条 commit 就是你的起点。</div>
+</div></div>
+
+<div class="step"><div class="n">10</div><div class="b">
+  <div class="t">建立目录约定（后续 6 周都用它）</div>
+<pre><code>项目根/
+├── web/        # Vue3 前端（W1 骨架，W6 界面）
+├── server/     # Express 服务端（W1 骨架，W3 起业务）
+├── corpus/     # 知识库语料 Markdown（W2 填充，≥30 篇）
+└── docs/       # 选题卡、选型说明、每周记录</code></pre>
+</div></div>
+
+<!-- ============ 第四部分 当堂验收 ============ -->
+<h2><span class="no">肆</span>当堂验收清单（下课前逐条打勾）</h2>
+<ul class="check">
+  <li>选题卡填写完整，经教师签字确认</li>
+  <li><code>docs/选型说明.md</code> 已提交（300–500 字）</li>
+  <li><code>npm run dev</code> 前端页面能打开（localhost:5173）</li>
+  <li>浏览器访问 <code>/api/health</code> 返回 <code>{"ok":true}</code></li>
+  <li><code>web/tsconfig.json</code> 中 <code>"strict": true</code></li>
+  <li><code>npx eslint .</code> 零 error</li>
+  <li><code>git log</code> 有 ≥3 条真实提交</li>
+  <li>目录结构 <code>web / server / corpus / docs</code> 已建立</li>
+</ul>
+
+<div class="callout blue"><strong>下周预告（W2 知识库建设）：</strong>按选题卡的 5 个主题域收集 ≥30 篇 Markdown 语料，每篇标注来源。选题卡里写的"语料可行性"这周就要兑现——如果到时找不到语料，本周的选题就是失败的。现在把来源链接收藏好。</div>
+
+<footer>
+  依据《课题任务书》与《7 周执行大纲》W1 分解生成 · 陪伴型机器人课题 · 个人独立完成
+</footer>
+
+</div>
+</body>
+</html>

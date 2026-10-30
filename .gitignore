@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.vscode/
+coverage/
+
+# 工作区协议与提交草稿，不进仓库
+.abc/
+docs/commits/current.txt
